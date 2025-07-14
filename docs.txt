@@ -1,0 +1,11 @@
+1---express server
+2---db connection
+3  ejs setup 
+4  ejs home - login - signup
+5  models schema
+6  routes for login and signup
+7  Authentication
+    -----npm i jsonwebtoken
+     ----service folder = > generate jwt token and validate token(this func is used with middle ware)
+     ----in login route , if users email and passward is matched then call generate token func and send cookie + redirect
+     ---- in middleware , make auth.js file and used second functiomn (validate user)

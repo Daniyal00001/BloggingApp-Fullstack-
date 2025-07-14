@@ -1,0 +1,34 @@
+const express = require('express')
+const connection = require('./connection')
+const path = require('path')
+const staticRoutes = require('./routes/staticroutes')
+const userRoutes = require('./routes/user')
+ const cookieParser = require('cookie-parser')
+
+const app = express()
+const port = 3000
+
+//ejs setup
+app.set('view engine', 'ejs');
+app.set('views', path.resolve('./views'));
+
+//db connection
+connection.connectDB()
+
+//middeleware
+app.use(express.static(path.resolve('./public')));
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(cookieParser());
+
+
+//routes
+app.use('/', staticRoutes);
+app.use('/user', userRoutes);
+
+
+
+
+app.listen(port, () => {
+    console.log(`Example app listening on port ${port}`)
+})
