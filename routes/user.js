@@ -52,6 +52,7 @@ routes.post('/login', async (req, res) => {
 routes.get('/logout', (req, res) => {
     res.clearCookie('token');
     res.redirect('/');
+    //coomit check
 });
 
 
