@@ -1,19 +1,25 @@
+const { validateToken } = require('../Service/Auth');
 
-const { ValidateUser } = require("../Service/Auth");
+function checkForAuthenticationCookie(cookieName) {
+    return (req, res, next) => {
+        const tokenCookieValue = req.cookies[cookieName];
+        console.log('🔍 Token Cookie Value:', tokenCookieValue);
 
-const restrictToLoginOnly = (req, res, next) => {   
-    const uid = req.cookies.token;
-    if (uid) {
-        const user = ValidateUser(uid);
-        if (user) {
-            req.user = user;
-            next();
-        } else {
-            res.redirect("/login");
+        if (!tokenCookieValue) {
+            // console.log('⛔ No token found.');
+            return next();
         }
-    } else {
-        res.redirect("/login");
-    }
-};
 
-module.exports = { restrictToLoginOnly };
+        try {
+            const userPayload = validateToken(tokenCookieValue);
+            req.user = userPayload;
+            // console.log('✅ Token valid. req.user set to:', req.user);
+        } catch (error) {
+            // console.log('❌ Token verification failed:', error.message);
+        }
+
+        next();
+    };
+}
+
+module.exports = { checkForAuthenticationCookie };

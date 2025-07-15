@@ -18,8 +18,6 @@ routes.post('/signup', async (req, res) => {
         res.redirect('/user/login');
     } catch (err) {
         if (err.code === 11000) {
-            // Duplicate email error
-            console.log("already    exisattttttttt")
             res.render('signup', { error: 'Email already exists. Please use a different one.' });
         } else {
             res.render('signup', { error: 'Something went wrong. Please try again.' });
@@ -29,7 +27,6 @@ routes.post('/signup', async (req, res) => {
 
 routes.post('/login', async (req, res) => {
     try {
-        //error on screen // via login ejs 
         const { email, password } = req.body;
         if (!email || !password) {
             return res.render('login', { error: 'Email and password are required.' });
@@ -42,12 +39,19 @@ routes.post('/login', async (req, res) => {
         }
 
         res.cookie('token', token, { httpOnly: true });
-        res.redirect('/');
+        return res.redirect('/');
 
     } catch (err) {
         console.error(err);
-        res.render('login', { error: 'Invalid email or password.' });
+        if (!res.headersSent) {
+            res.render('login', { error: 'Invalid email or password.' });
+        }
     }
+});
+
+routes.get('/logout', (req, res) => {
+    res.clearCookie('token');
+    res.redirect('/');
 });
 
 

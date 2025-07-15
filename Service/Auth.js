@@ -10,9 +10,9 @@ function Generatetoken(user) {
 
 
 // this func is call in middlewares
-function ValidateUser(token) {
+function validateToken(token) {
     if (!token) return null;
     return jwt.verify(token, secret);
 }
 
-module.exports = { Generatetoken, ValidateUser };
+module.exports = { Generatetoken, validateToken };

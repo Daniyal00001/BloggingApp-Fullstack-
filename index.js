@@ -3,8 +3,9 @@ const connection = require('./connection')
 const path = require('path')
 const staticRoutes = require('./routes/staticroutes')
 const userRoutes = require('./routes/user')
- const cookieParser = require('cookie-parser')
-
+const cookieParser = require('cookie-parser')
+const { checkForAuthenticationCookie } = require('./middlewares/auth')
+const { validateToken, Generatetoken } = require('./Service/Auth')
 const app = express()
 const port = 3000
 
@@ -20,6 +21,7 @@ app.use(express.static(path.resolve('./public')));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser());
+app.use(checkForAuthenticationCookie('token'));
 
 
 //routes

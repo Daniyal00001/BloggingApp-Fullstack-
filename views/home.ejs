@@ -8,7 +8,14 @@
 
 <body>
     <%- include('partials/navbar') %>
-
+    <div class="container">
+        <h1>Welcome to Blogify</h1>
+        <p>This is your home page.</p>
+        <% if (user) { %>
+            <p>Hello, <%= user.fullname %>! You are logged in.</p>
+        <% } else { %>
+            <p>Please log in to access more features.</p>
+        <% } %>
     <%- include('partials/script') %>
 </body>
 

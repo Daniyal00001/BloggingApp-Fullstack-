@@ -9,3 +9,5 @@
      ----service folder = > generate jwt token and validate token(this func is used with middle ware)
      ----in login route , if users email and passward is matched then call generate token func and send cookie + redirect
      ---- in middleware , make auth.js file and used second functiomn (validate user)
+     ---- apply middleweare , (here middleware is not strictly force to login)
+     
