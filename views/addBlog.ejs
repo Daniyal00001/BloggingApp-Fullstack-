@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('partials/head') %>
+        <title>Add New Blog</title>
+        <style>
+            .form-container {
+                max-width: 600px;
+                background: #fff;
+                padding: 30px;
+                border-radius: 15px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            }
+        </style>
+</head>
+
+<body class="bg-light">
+
+    <%- include('partials/navbar') %>
+
+    <% if (error) { %>
+        <div class="alert alert-danger">
+            <%= error %>
+        </div>
+        <% } %>
+
+        <div class="container d-flex justify-content-center align-items-center my-5">
+            <div class="form-container">
+                <h2 class="mb-4 text-center text-primary">Add New Blog</h2>
+
+                <form action="/blog/add-blog" method="POST" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="title" class="form-label fw-bold">Blog Title</label>
+                        <input type="text" class="form-control" id="title" name="title" placeholder="Enter blog title"
+                            required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="description" class="form-label fw-bold">Description</label>
+                        <textarea class="form-control" id="description" name="description" rows="5"
+                            placeholder="Write blog content..." required></textarea>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="image" class="form-label fw-bold">Upload Image</label>
+                        <input class="form-control" type="file" id="image" name="image" accept="image/*" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">Submit Blog</button>
+                </form>
+            </div>
+        </div>
+
+        <%- include('partials/script') %>
+</body>
+
+</html>

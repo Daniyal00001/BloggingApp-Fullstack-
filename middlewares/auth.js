@@ -6,7 +6,7 @@ function checkForAuthenticationCookie(cookieName) {
         console.log('🔍 Token Cookie Value:', tokenCookieValue);
 
         if (!tokenCookieValue) {
-            // console.log('⛔ No token found.');
+            // console.log('⛔ No token found.'); // not loggedin
             return next();
         }
 

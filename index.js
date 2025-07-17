@@ -3,6 +3,7 @@ const connection = require('./connection')
 const path = require('path')
 const staticRoutes = require('./routes/staticroutes')
 const userRoutes = require('./routes/user')
+const blogRoutes = require('./routes/blog')
 const cookieParser = require('cookie-parser')
 const { checkForAuthenticationCookie } = require('./middlewares/auth')
 const { validateToken, Generatetoken } = require('./Service/Auth')
@@ -27,6 +28,8 @@ app.use(checkForAuthenticationCookie('token'));
 //routes
 app.use('/', staticRoutes);
 app.use('/user', userRoutes);
+app.use('/blog', blogRoutes);
+
 
 
 
