@@ -23,7 +23,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser());
 app.use(checkForAuthenticationCookie('token'));
-
+app.use('/images', express.static(path.resolve('./public/images/uploads')));
 
 //routes
 app.use('/', staticRoutes);
